@@ -1,0 +1,797 @@
+@import "./colors";
+@import "./components";
+@import "./mixins";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.6rem;
+}
+
+
+
+//=======================================>>> NAV
+.burger-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 1em;
+  background: none;
+  //   dajemy border, zeby nie bylo przeskoku po kliknieciu
+  border: 1px solid transparent;
+  cursor: pointer;
+  z-index: 9999;
+
+  &:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+  }
+
+  &:hover {
+
+    .burger-btn__bars::after,
+    .burger-btn__bars::before {
+      width: 100%;
+    }
+  }
+
+  &__box {
+    position: relative;
+    width: 40px;
+    height: 30px;
+  }
+
+  &__bars,
+  &__bars::after,
+  &__bars::before {
+    @include burgerBtn;
+  }
+
+  &__bars {
+    width: 100%;
+
+    &::after {
+      top: 13px;
+      width: 60%;
+    }
+
+    &::before {
+      top: 27px;
+      width: 30%;
+      transition-delay: 0.1s;
+    }
+  }
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.65, 0.05, 0.35, 0.96);
+  background-image: $blue-gradient-solid;
+  z-index: 9;
+
+  &--active {
+    transform: translateX(0);
+  }
+
+  &__item {
+    position: relative;
+    display: block;
+    color: $pure-white;
+    margin: 0.5em 0;
+    padding: 0.5em 2em;
+    font-size: 2.8rem;
+    text-decoration: none;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      transform: scaleY(0);
+      background-color: $pure-white;
+      transition: transform 0.3s;
+      content: "";
+    }
+
+    &:hover::before {
+      transform: scaleY(1);
+    }
+  }
+}
+
+@keyframes navItemsAnimation {
+  from {
+    transform: translateX(200%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.nav-items-animation {
+  //both żeby nie było przeskoków
+  animation: navItemsAnimation 1s both;
+  // animation-delay: 0.3s;
+}
+
+.black-bars-color,
+.black-bars-color::after,
+.black-bars-color::before {
+  background-color: $dark;
+}
+
+//=======================================>>> HEADER
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 2em;
+  height: 75vh;
+  text-align: center;
+  color: $pure-white;
+  @include heroImages("../img/palma_small.jpg");
+  background-attachment: scroll;
+
+  &__heading {
+    font-family: "Dancing Script", cursive;
+    font-size: 5rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    font-size: 1.4rem;
+  }
+
+  &__btn {
+    margin-top: 2em;
+    padding: 0.8em 1.6em;
+    font-size: 1.4rem;
+    font-weight: bolder;
+    background: $pure-white;
+    border: none;
+    border-radius: 8px;
+    color: $dark;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &::before {
+      background-color: $light-white;
+    }
+  }
+}
+
+//MAIN
+//DREAMS SECTION
+.dreams {
+  &__box {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+  }
+
+  &__img {
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  &__title {
+    margin-bottom: 0.5em;
+  }
+
+  &__text {
+    font-size: 1, 4rem;
+  }
+}
+
+//HEREO_IMG
+.hero-img {
+  position: relative;
+  padding: 10em 2em;
+  @include heroImages('../img/polynesia_small.jpg');
+  text-align: center;
+  color: $pure-white;
+  overflow: hidden;
+
+  &__title {
+    font-family: 'Dancing Script', cursive;
+    margin-bottom: 0.5em;
+    font-size: 4.8rem;
+  }
+
+  &__text {
+    padding: 1em 0;
+  }
+}
+
+//ISLANDS
+.islands {
+  &__card {
+    position: relative;
+    margin: 1em 0;
+    height: 450px;
+    color: $pure-white;
+    text-align: center;
+    perspective: 1000px;
+
+    &:hover {
+      .islands__card-img {
+        transform: rotateY(-180deg);
+        opacity: 0;
+      }
+
+      .islands__card-info {
+        transform: rotateY(0);
+        opacity: 1;
+      }
+    }
+
+    &-img {
+      padding: 2em;
+      height: 100%;
+      border-radius: 8px;
+      background-size: cover;
+      transition: transform 1s, opacity 1s;
+
+      &--first {
+        background-image: $light-blue-gradient, url('../img/island_small.jpg');
+      }
+
+      &--second {
+        background-image: $blue-gradient, url('../img/island2_small.jpg');
+      }
+
+      &--third {
+        background-image: $purple-gradient, url('../img/island3_small.jpg');
+      }
+
+      &-title {
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.7rem;
+      }
+
+      &-info {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        font-size: 1.8rem;
+
+        i {
+          margin-right: 0.3em;
+        }
+      }
+    }
+
+    &-info {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-image: $light-blue-gradient-solid;
+      border-radius: 8px;
+      opacity: 0;
+      transform: rotateY(180deg);
+      transition: transform 1s, opacity 1s;
+
+      &-title {
+        @include islandCardStyles;
+        top: 1.2em;
+        font-family: "Dancing Script", cursive;
+        font-size: 2.7rem;
+      }
+
+      &-list {
+        margin: 0 auto;
+        width: 70%;
+        list-style: none;
+
+        &-item {
+          padding: 1em;
+          font-size: 1.4rem;
+          border-bottom: 1px solid $light-white;
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+
+      &-btn {
+        @include islandCardStyles;
+        bottom: 2em;
+        padding: 1em;
+        border-radius: 8px;
+        width: 80%;
+        border: none;
+        background-color: $green-color;
+        cursor: pointer;
+
+        &::before {
+          background-color: $green-color-hover;
+        }
+      }
+    }
+  }
+}
+
+//OFFERS
+.offers {
+  position: relative;
+  @include heroImages("../img/oferty4_small.jpg");
+  overflow: hidden;
+
+  .section-heading {
+    color: $pure-white;
+  }
+
+  &__option {
+    margin: 1em 0;
+    background-color: $pure-white;
+    overflow: hidden;
+    box-shadow: 5px 5px 5px rgba(46, 46, 46, 0.18);
+
+
+    &-img {
+      width: 100%;
+      transition: transform .3s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    &-info {
+      padding: 2em;
+      background-color: $pure-white;
+      z-index: 5;
+    }
+
+    &-heading {
+      margin-bottom: 0.5em;
+      font-size: 2.4rem;
+      font-weight: 300;
+    }
+
+    &-text {
+      margin-bottom: 0.5em;
+      font-size: 1.3rem;
+      color: $dark;
+    }
+
+    &-btn {
+      margin-top: 1em;
+      padding: 0.8em;
+      width: 100%;
+      color: $pure-white;
+      background-color: $main-color;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+
+      &::before {
+        background-color: $secondary-color;
+      }
+    }
+  }
+
+
+
+}
+
+//REVIEWS
+@media(max-width: 767px) {
+  .reviews.section-padding {
+    padding: 6em 0;
+  }
+}
+
+.reviews {
+  &__box {
+    position: relative;
+    margin: 2em;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 3px 3px 10px rgba(46, 46, 46, 0.18);
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+
+  &__box-img {
+    position: absolute;
+    top: 8%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  &__box-quote {
+    margin-bottom: 1em;
+    font-size: 3rem;
+    color: $main-color;
+  }
+
+  &__box-text {
+    margin-bottom: 1em;
+    font-size: 1.4rem;
+    color: $dark;
+  }
+}
+
+//CONTACT
+.contact {
+  position: relative;
+  background-color: $light-white;
+  overflow: hidden;
+
+  .white-block-left {
+    background-color: $dark;
+  }
+
+  &__form,
+  &__form-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__form-label {
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+  }
+
+  &__form-input {
+    @include contactForm;
+  }
+
+  &__form-textarea {
+    @include contactForm;
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    min-height: 150px;
+  }
+
+  &__form-btn {
+    align-self: flex-end;
+    padding: 1em;
+    width: 100%;
+    max-width: 300px;
+    color: $pure-white;
+    border: none;
+    border-radius: 8px;
+    background-color: $main-color;
+    cursor: pointer;
+
+    &::before {
+      background-color: $secondary-color;
+    }
+  }
+}
+
+//FOOTER
+.footer {
+  color: $pure-white;
+  background-color: $dark;
+
+  .wrapper {
+    padding: 6em 2em 2em 2em;
+  }
+
+  &__box {
+    font-size: 1.4rem;
+  }
+
+  &__box-desktop {
+    display: none;
+  }
+
+  &__box-title {
+    margin-bottom: 1em;
+    font-size: 3rem;
+    text-transform: uppercase;
+  }
+
+  &__box-social {
+    margin: 2em 0 1em;
+  }
+
+  &__box-link {
+    padding: 0 .3em;
+    font-size: 3.6rem;
+    color: $pure-white;
+    text-decoration: none;
+    transition: color .3s;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    :hover {
+      color: $light-white;
+    }
+  }
+
+  &__bottom-text {
+    padding: 2em;
+    text-align: center;
+  }
+}
+
+
+
+//==========================================================
+//-------------------------------------------------->>> MEDIA QUERIES<<<--------------------------- 
+@media(min-width:576px) {
+  .dreams {
+    &__box {
+      flex-direction: row;
+      justify-content: space-between;
+
+      &-text {
+        width: 55%;
+
+        &--right {
+          text-align: right;
+        }
+      }
+
+      &-img {
+        width: 40%;
+
+        &--right {
+          order: 1;
+        }
+      }
+    }
+
+    &__img {
+      margin-bottom: 0;
+      max-height: 300px;
+    }
+  }
+
+  .offers {
+    &__option {
+      display: flex;
+      margin: 2em 0;
+      width: 100%;
+
+      &-img {
+        width: 50%;
+        height: auto;
+
+        &--right {
+          order: 1;
+        }
+      }
+
+      &-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      &-heading {
+        margin-bottom: 0.5em;
+        font-size: 3.6rem;
+      }
+
+      &-btn {
+        padding: 1em;
+      }
+    }
+  }
+
+}
+
+@media (min-width: 768px) {
+
+
+  .islands {
+    &__cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    &__card {
+      margin: 1em;
+      width: 45%;
+    }
+  }
+
+  .white-block {
+    height: 46px;
+    width: 36%;
+  }
+
+  .header {
+    &__heading {
+      font-size: 6.6rem;
+    }
+
+    &__text {
+      font-size: 2.2rem;
+    }
+
+    &__btn {
+      font-size: 1.6rem;
+    }
+
+
+  }
+
+  .dreams {
+    &__text {
+      font-size: 1.8rem;
+    }
+  }
+
+  .hero-img {
+    padding: 30rem 2em;
+
+    hr {
+      margin: 0 auto;
+      width: 70%;
+    }
+
+    &__text {
+      font-size: 2.2em;
+    }
+  }
+
+  .footer {
+    &__boxes {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__box-desktop {
+      display: block;
+    }
+
+    &__box {
+      margin: 0 2em;
+      width: 25%;
+
+      &:first-child {
+        width: 50%;
+      }
+    }
+
+    &__box-title {
+      font-size: 2.4rem;
+    }
+
+    &__box-list {
+      list-style: none;
+    }
+
+    &__box-list-item {
+      margin-bottom: 1em;
+
+      a {
+        color: $pure-white;
+        text-decoration: none;
+
+        :hover {
+          color: $light-white;
+        }
+      }
+    }
+  }
+
+}
+
+@media (min-width: 992px) {
+  .burger-btn {
+    top: 50px;
+    right: 50px;
+  }
+
+  .header {
+    background-image: $blue-gradient, url("../img/palma_big.jpg");
+
+    &__heading {
+      font-size: 10rem;
+    }
+  }
+
+  .nav {
+    &__item {
+      font-size: 4.8rem;
+    }
+  }
+
+  .dreams {
+    &__box {
+      margin: 5em 0;
+
+      &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        margin-bottom: 2.5em;
+      }
+    }
+  }
+
+  .hero-img {
+    padding: 40rem 2em;
+    background-image: $blue-gradient, url('../img/polynesia_big.jpg');
+
+    &__title {
+      font-size: 7.2rem;
+      ;
+    }
+
+    hr {
+      width: 60%;
+      max-width: 900px;
+    }
+  }
+
+  .offers {
+    background-image: $blue-gradient, url('../img/oferty4_big.jpg');
+
+    &__option {
+      &-img {
+        object-fit: cover;
+        height: 300px;
+      }
+
+      &-text {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+
+
+}
+
+@media (min-width: 1100px) {
+  .islands {
+    &__card {
+      width: 30%;
+    }
+  }
+}
