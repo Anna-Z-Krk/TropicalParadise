@@ -7,7 +7,7 @@ You can view it here: https://anna-z-krk.github.io/TropicalParadise/
 AIM OF THE PROJECT:
 - practising flex-box
 - different usage of CSS tricks
-- creating responsive one page site
+- creating responsive single page site
 
 USED IN THIS PROJECT:
 - Visual Studio Code
