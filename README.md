@@ -10,7 +10,7 @@ AIM OF THE PROJECT:
 - creating responsive one page site
 
 USED IN THIS PROJECT:
-Visual Studio Code
-HTML, CSS3 ( BEM, SASS, flex-box), JS
+- Visual Studio Code
+- HTML, CSS3 ( BEM, SASS, flex-box), JS
 
 *based on course by MMCSchool 
