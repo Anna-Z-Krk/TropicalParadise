@@ -1,7 +1,9 @@
 # TropicalParadise
 
 ##  Sample of flex-box, BEM and Sass  
- 
+
+![Preview:](https://github.com/Anna-Z-Krk/TropicalParadise/blob/main/tropical_paradise_prev.png)
+
 You can view it here: https://anna-z-krk.github.io/TropicalParadise/
 
 AIM OF THE PROJECT:
